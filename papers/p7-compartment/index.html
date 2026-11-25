@@ -10,8 +10,9 @@
 <nav>
   <div class="nav-inner">
     <a class="nav-brand" href="../../">&larr; Portfolio</a>
-    <ul class="nav-links">
+    <ul class="nav-links" style="gap:1rem">
       <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#videos">Videos</a></li>
       <li><a href="#figures">Figures</a></li>
       <li><a href="#bibtex">BibTeX</a></li>
     </ul>
@@ -39,17 +40,17 @@
     <sup>6</sup> Department of Urban Management, Kyoto University, Kyoto 615-8246, Japan
   </p>
   <p class="affiliations" style="margin-top:-1.25rem">
-    <sup>#</sup> Joint first authors, these authors contributed equally to this study. &nbsp;
-    <sup>*</sup> Corresponding authors: <a href="mailto:yding27@umd.edu">yding27@umd.edu</a>, <a href="mailto:xy.huang@polyu.edu.hk">xy.huang@polyu.edu.hk</a>
+    <sup>#</sup> Joint first authors. &nbsp;
+    <sup>*</sup> Corresponding authors.
   </p>
   <div class="badges">
-    <a class="badge badge-outline" href="#figures">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      Figures
-    </a>
     <a class="badge badge-outline" href="#videos">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
       Videos
+    </a>
+    <a class="badge badge-outline" href="#figures">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Figures
     </a>
   </div>
   <div class="teaser">
@@ -91,25 +92,6 @@
   </div>
 </section>
 
-<section id="figures">
-  <h2 class="section-title">Technical Workflow</h2>
-
-  <div class="figure">
-    <img src="fig-rules.png" alt="GB 50016 rule extraction and JSON rule modeling workflow">
-    <p class="fig-note"><strong>Fig. 2.</strong> Workflow for transforming GB 50016 provisions into executable fire-compartmentation constraints.</p>
-  </div>
-
-  <div class="figure">
-    <img src="fig-cad.png" alt="CAD preprocessing and semantic cleaning workflow">
-    <p class="fig-note"><strong>Fig. 3.</strong> CAD preprocessing and semantic cleaning workflow for architectural floor plans.</p>
-  </div>
-
-  <div class="figure">
-    <img src="fig-ekap.png" alt="Construction and organization of the EKAP prompt">
-    <p class="fig-note"><strong>Fig. 4.</strong> Construction and organization of the EKAP prompt for fire-compartmentation generation.</p>
-  </div>
-</section>
-
 <section id="videos">
   <h2 class="section-title">Demo Video</h2>
   <div class="videos-grid">
@@ -124,6 +106,20 @@
       </video>
       <p class="fig-note">A 30-second walkthrough from building information and DXF input to a generated fire-compartmentation proposal.</p>
     </div>
+  </div>
+</section>
+
+<section id="figures">
+  <h2 class="section-title">Technical Workflow</h2>
+
+  <div class="figure">
+    <img src="fig-rules.png" alt="GB 50016 rule extraction and JSON rule modeling workflow">
+    <p class="fig-note"><strong>Fig. 2.</strong> Workflow for transforming GB 50016 provisions into executable fire-compartmentation constraints.</p>
+  </div>
+
+  <div class="figure">
+    <img src="fig-ekap.png" alt="Construction and organization of the EKAP prompt">
+    <p class="fig-note"><strong>Fig. 4.</strong> Construction and organization of the EKAP prompt for fire-compartmentation generation.</p>
   </div>
 </section>
 
