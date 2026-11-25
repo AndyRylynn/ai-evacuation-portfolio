@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e40af"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#ffffff"/>
+  <text x="36" y="48" font-size="30" font-weight="700" fill="#111827">WUIEvac: coupled wildfire–evacuation simulation</text>
+  <text x="36" y="80" font-size="18" fill="#6b7280">From hazard and exposure to evacuation reliability metrics</text>
+
+  <!-- Data -->
+  <rect x="26" y="112" width="270" height="646" rx="18" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="48" y="148" font-size="24" font-weight="700" fill="#1e40af">DATA</text>
+  <rect x="44" y="168" width="234" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="60" y="198" font-size="19" font-weight="700" fill="#111827">Terrain, fuel &amp; weather</text>
+  <text x="60" y="226" font-size="17" fill="#374151">DEM, slope, habitat</text>
+  <text x="60" y="252" font-size="17" fill="#374151">ERA5 wind &amp; moisture</text>
+
+  <rect x="44" y="296" width="234" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="60" y="326" font-size="19" font-weight="700" fill="#111827">Buildings &amp; people</text>
+  <text x="60" y="354" font-size="17" fill="#374151">Footprints, floors, SSUG</text>
+  <text x="60" y="380" font-size="17" fill="#374151">Census &amp; car ownership</text>
+
+  <rect x="44" y="424" width="234" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="60" y="454" font-size="19" font-weight="700" fill="#111827">Pedestrian network</text>
+  <text x="60" y="482" font-size="17" fill="#374151">3DPN walkways, stairs</text>
+  <text x="60" y="508" font-size="17" fill="#374151">Footbridges, MTR exits</text>
+
+  <rect x="44" y="552" width="234" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="60" y="582" font-size="19" font-weight="700" fill="#111827">Road network</text>
+  <text x="60" y="610" font-size="17" fill="#374151">Lanes, turn bans</text>
+  <text x="60" y="636" font-size="17" fill="#374151">Signal sites &amp; timing</text>
+
+  <!-- Fire -->
+  <rect x="316" y="112" width="270" height="646" rx="18" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="338" y="148" font-size="24" font-weight="700" fill="#1e40af">FIRE SPREAD</text>
+  <rect x="334" y="168" width="234" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="350" y="198" font-size="19" font-weight="700" fill="#111827">Rothermel ROS</text>
+  <text x="350" y="226" font-size="17" fill="#374151">Fuel, moisture, wind</text>
+  <text x="350" y="252" font-size="17" fill="#374151">Slope-adjusted spread</text>
+
+  <rect x="334" y="296" width="234" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="350" y="326" font-size="19" font-weight="700" fill="#111827">Eikonal / Huygens front</text>
+  <text x="350" y="354" font-size="17" fill="#374151">10 m raster</text>
+  <text x="350" y="380" font-size="17" fill="#374151">Arrival-time field</text>
+
+  <rect x="334" y="424" width="234" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="350" y="454" font-size="19" font-weight="700" fill="#111827">TCA cross-check</text>
+  <text x="350" y="482" font-size="17" fill="#374151">Cellular automaton</text>
+  <text x="350" y="508" font-size="17" fill="#374151">Alternative engine</text>
+
+  <rect x="334" y="552" width="234" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="350" y="582" font-size="19" font-weight="700" fill="#111827">Calibration</text>
+  <text x="350" y="610" font-size="17" fill="#374151">3 historical HK fires</text>
+  <text x="350" y="636" font-size="17" fill="#374151">SSC, FAR, MR</text>
+
+  <!-- Coupling -->
+  <rect x="606" y="112" width="280" height="646" rx="18" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="628" y="148" font-size="24" font-weight="700" fill="#1e40af">HAZARD COUPLING</text>
+  <rect x="624" y="168" width="244" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="640" y="198" font-size="19" font-weight="700" fill="#111827">Arrival time</text>
+  <text x="640" y="226" font-size="17" fill="#374151">Fire front reaches each</text>
+  <text x="640" y="252" font-size="17" fill="#374151">grid cell and link</text>
+
+  <rect x="624" y="296" width="244" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="640" y="326" font-size="19" font-weight="700" fill="#111827">Threat time</text>
+  <text x="640" y="354" font-size="17" fill="#374151">Earliest fire arrival</text>
+  <text x="640" y="380" font-size="17" fill="#374151">within D_exp</text>
+
+  <rect x="624" y="424" width="244" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="640" y="454" font-size="19" font-weight="700" fill="#111827">Warning</text>
+  <text x="640" y="482" font-size="17" fill="#374151">T_lead before threat</text>
+  <text x="640" y="508" font-size="17" fill="#374151">Departure curve shift</text>
+
+  <rect x="624" y="552" width="244" height="112" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="640" y="582" font-size="19" font-weight="700" fill="#111827">Avoidance</text>
+  <text x="640" y="610" font-size="17" fill="#374151">Penalty on threatened</text>
+  <text x="640" y="636" font-size="17" fill="#374151">links (soft avoidance)</text>
+
+  <!-- Evacuation -->
+  <rect x="906" y="112" width="370" height="646" rx="18" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="928" y="148" font-size="24" font-weight="700" fill="#1e40af">DUAL-LAYER EVACUATION</text>
+  <rect x="924" y="168" width="334" height="238" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="942" y="200" font-size="20" font-weight="700" fill="#111827">Pedestrian LTM</text>
+  <text x="942" y="232" font-size="17" fill="#374151">Building T–N curves &amp; stairs</text>
+  <text x="942" y="260" font-size="17" fill="#374151">Vertical discharge to streets</text>
+  <text x="942" y="288" font-size="17" fill="#374151">3DPN walkways &amp; footbridges</text>
+  <text x="942" y="316" font-size="17" fill="#374151">Boundary + MTR exits</text>
+  <text x="942" y="344" font-size="17" fill="#374151">Congestion-aware routing (60 s)</text>
+  <text x="942" y="378" font-size="16" fill="#6b7280">Leave the area or enter</text>
+  <text x="942" y="398" font-size="16" fill="#6b7280">metro stations</text>
+
+  <rect x="924" y="430" width="334" height="238" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="942" y="462" font-size="20" font-weight="700" fill="#111827">Vehicle LTM</text>
+  <text x="942" y="494" font-size="17" fill="#374151">Lane capacity &amp; turn bans</text>
+  <text x="942" y="522" font-size="17" fill="#374151">Signals: normal / preempt /</text>
+  <text x="942" y="550" font-size="17" fill="#374151">coordinated / flash</text>
+  <text x="942" y="578" font-size="17" fill="#374151">Car ownership &amp; PCU buses</text>
+  <text x="942" y="606" font-size="17" fill="#374151">Congestion-aware routing (10 s)</text>
+  <text x="942" y="640" font-size="16" fill="#6b7280">Share the road network</text>
+  <text x="942" y="660" font-size="16" fill="#6b7280">with signal control</text>
+
+  <!-- Reliability -->
+  <rect x="1306" y="112" width="268" height="646" rx="18" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1328" y="148" font-size="24" font-weight="700" fill="#1e40af">RELIABILITY</text>
+  <rect x="1324" y="168" width="232" height="86" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1340" y="198" font-size="18" font-weight="700" fill="#111827">Evacuation time</text>
+  <text x="1340" y="226" font-size="16" fill="#374151">T50 / T90 / T100</text>
+
+  <rect x="1324" y="268" width="232" height="86" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1340" y="298" font-size="18" font-weight="700" fill="#111827">Coverage &amp; success</text>
+  <text x="1340" y="326" font-size="16" fill="#374151">Warned vs not warned</text>
+
+  <rect x="1324" y="368" width="232" height="86" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1340" y="398" font-size="18" font-weight="700" fill="#111827">Congestion</text>
+  <text x="1340" y="426" font-size="16" fill="#374151">Link-hours, bottlenecks</text>
+
+  <rect x="1324" y="468" width="232" height="86" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1340" y="498" font-size="18" font-weight="700" fill="#111827">Time margin</text>
+  <text x="1340" y="526" font-size="16" fill="#374151">P(fire arrival &lt; evacuation)</text>
+
+  <rect x="1324" y="568" width="232" height="86" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="1340" y="598" font-size="18" font-weight="700" fill="#111827">Sensitivity</text>
+  <text x="1340" y="626" font-size="16" fill="#374151">Morris / Sobol indices</text>
+
+  <!-- Arrows -->
+  <line x1="296" y1="435" x2="316" y2="435" stroke="#1e40af" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="586" y1="435" x2="606" y2="435" stroke="#1e40af" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="886" y1="435" x2="906" y2="435" stroke="#1e40af" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="1276" y1="435" x2="1306" y2="435" stroke="#1e40af" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <!-- Management band -->
+  <rect x="26" y="790" width="1548" height="78" rx="14" fill="#dbeafe" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="48" y="822" font-size="20" font-weight="700" fill="#1e40af">MANAGEMENT LEVERS</text>
+  <text x="48" y="850" font-size="18" fill="#1e3a8a">Warning lead  ·  phased evacuation  ·  signal preemption / coordination  ·  metro access  ·  avoidance penalty</text>
+</svg>

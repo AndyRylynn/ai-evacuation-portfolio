@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WUIEvac — Wildfire Evacuation Simulation for High-Rise Hong Kong</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin-top:1.5rem}
+.stat{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
+.stat-value{font-size:1.6rem;font-weight:800;color:var(--blue);line-height:1.2}
+.stat-label{font-size:.82rem;color:var(--muted);margin-top:.35rem;line-height:1.5}
+.case-note{font-size:.9rem;color:var(--muted);margin-top:1.1rem;line-height:1.8}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../">&larr; Portfolio</a>
+    <ul class="nav-links" style="gap:1rem">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#case">Case Study</a></li>
+      <li><a href="#bibtex">BibTeX</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="venue-tag">Working paper 2026</div>
+  <h1 class="paper-title">WUIEvac: Coupled Wildfire–Evacuation Simulation for High-Rise Hong Kong</h1>
+  <p class="authors">
+    <span class="author">Tong Lu</span><sup>1</sup>,
+    Sizhong Qin<sup>3</sup>,
+    Xiyan Tang<sup>2</sup>,
+    Yuan Tian<sup>2</sup>,
+    Yuxin Zhang<sup>4</sup>,
+    <span class="author">Xinyan Huang</span><sup>1,*</sup>,
+    <span class="author">Xinzheng Lu</span><sup>3,*</sup>
+  </p>
+  <p class="affiliations">
+    <sup>1</sup> Research Centre for Smart Urban Resilience and Firefighting, Department of Building Environment and Energy Engineering, The Hong Kong Polytechnic University, Hong Kong<br>
+    <sup>2</sup> School of Future Cities, University of Science and Technology Beijing, Beijing, China<br>
+    <sup>3</sup> Department of Civil Engineering, Tsinghua University, Beijing, China<br>
+    <sup>4</sup> Department of Urban Management, Kyoto University, Kyoto, Japan
+  </p>
+  <p class="affiliations" style="margin-top:-1.25rem">
+    <sup>*</sup> Corresponding authors.
+  </p>
+  <div class="badges">
+    <a class="badge badge-primary" href="#demo">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Watch demo
+    </a>
+    <a class="badge badge-outline" href="#case">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-5 4 3 5-7"/></svg>
+      Case study
+    </a>
+    <a class="badge badge-outline" href="#framework">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Framework
+    </a>
+  </div>
+  <div class="teaser">
+    <img src="teaser.png" alt="Hong Kong wildfire simulation data viewer">
+    <p class="teaser-caption"><strong>Fig. 1.</strong> The Hong Kong-wide data viewer used by WUIEvac, showing habitat and fuel layers; building, pedestrian, and road-network data feed the coupled simulation downstream.</p>
+  </div>
+</div>
+
+<section id="overview">
+  <h2 class="section-title">Overview</h2>
+  <p class="abstract">
+    Wildland–urban interface (WUI) fires in Hong Kong differ from their low-rise counterparts: dense high-rise towers, steep terrain, and a multimodal transport network mean that evacuation couples <strong>vertical building discharge</strong> with <strong>horizontal pedestrian and vehicle flows</strong>. WUIEvac is a city-scale, risk-informed simulation framework that links a Huygens-based wildfire spread model, census-derived demand, building T–N discharge curves, an LTM pedestrian network with metro exits, and an LTM vehicle network with signal control. The framework is calibrated against satellite-derived burn perimeters from historical Hong Kong wildfires and is used to quantify evacuation reliability under uncertain fire, warning, and demand conditions. The demo shows the complete workflow, from area selection and fire spread to dual-layer evacuation and replay.
+  </p>
+  <div class="stat-grid">
+    <div class="stat"><div class="stat-value">6</div><div class="stat-label">Hong Kong WUI districts modelled</div></div>
+    <div class="stat"><div class="stat-value">10 m</div><div class="stat-label">Wildfire spread grid</div></div>
+    <div class="stat"><div class="stat-value">2</div><div class="stat-label">Coupled evacuation layers</div></div>
+    <div class="stat"><div class="stat-value">3</div><div class="stat-label">Historical fires used for calibration</div></div>
+  </div>
+</section>
+
+<section id="demo">
+  <h2 class="section-title">Demo Video</h2>
+  <div class="videos-grid">
+    <div class="video-card">
+      <div class="video-label">
+        <span class="video-badge">V1</span>
+        <span class="video-title-text">WUIEvac workflow: from area selection to dual-layer replay</span>
+      </div>
+      <video controls preload="metadata" poster="poster.jpg">
+        <source src="v1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="fig-note">55-second overview: select a WUI area, simulate fire spread, build the pedestrian and vehicle networks, and inspect congestion and replay for both evacuation layers.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <h2 class="section-title">How It Works</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🔥</div>
+      <div class="card-title">Fire Spread &amp; Calibration</div>
+      <div class="card-body">Rothermel rate of spread on a 10 m raster, propagated with an Eikonal/Huygens front; fuel parameters calibrated on three historical Hong Kong wildfires.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏢</div>
+      <div class="card-title">Vertical + Horizontal Evacuation</div>
+      <div class="card-body">Building T–N curves and stairs release occupants to the 3DPN pedestrian network; walkers can leave the area or enter metro stations, while vehicles use the road network with signal control.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <div class="card-title">Risk &amp; Management</div>
+      <div class="card-body">Warning waves, T90, congestion, and avoidance are quantified to test warning lead, signal preemption, and metro access.</div>
+    </div>
+  </div>
+</section>
+
+<section id="framework">
+  <h2 class="section-title">Framework</h2>
+  <div class="figure">
+    <img src="framework.svg" alt="WUIEvac modelling framework">
+    <p class="fig-note">WUIEvac couples hazard, exposure, response, and management layers to produce evacuation reliability metrics.</p>
+  </div>
+</section>
+
+<section id="case">
+  <h2 class="section-title">Case Study — Tung Chung 20 h Fire</h2>
+  <p class="abstract">
+    A 20-hour fire scenario in the Tung Chung WUI district, simulated with the coupled model. The district contains 747 buildings and 78,576 residents; 45,051 residents are warned and 33,525 remain outside the warning footprint. All warned pedestrians and vehicles reach an exit, while 16 pedestrian links and 3 vehicle links exceed 30 minutes of congestion.
+  </p>
+  <div class="stat-grid">
+    <div class="stat"><div class="stat-value">747</div><div class="stat-label">Buildings modelled</div></div>
+    <div class="stat"><div class="stat-value">45,051</div><div class="stat-label">Residents warned</div></div>
+    <div class="stat"><div class="stat-value">100%</div><div class="stat-label">Evacuation success (warned population)</div></div>
+    <div class="stat"><div class="stat-value">19</div><div class="stat-label">Congestion hotspots (16 pedestrian + 3 vehicle)</div></div>
+  </div>
+  <p class="case-note">Three SSUG zones are warned between 2.6 h and 11.1 h after ignition. Metrics are from the coupled demonstration run; warning-wave timing, rather than the ignition clock, is used in the paper to separate fire arrival from evacuation performance.</p>
+</section>
+
+<section id="research">
+  <h2 class="section-title">Research</h2>
+  <div class="highlight-box">
+    <h4>Working paper — target: Reliability Engineering &amp; System Safety</h4>
+    <ul>
+      <li>First coupled high-rise WUI framework linking Huygens wildfire spread, vertical building discharge, pedestrian and vehicle LTM, metro exits, and signal control.</li>
+      <li>Fire model calibrated against satellite-derived burn perimeters from three historical Hong Kong wildfires.</li>
+      <li>Reliability assessment under uncertain fire, warning, and demand conditions, with sensitivity analysis and management-strategy evaluation.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="bibtex">
+  <h2 class="section-title">BibTeX</h2>
+  <div style="position:relative">
+    <div class="bibtex-block" id="bib">@unpublished{lu2026wuievac,
+  title   = {WUIEvac: Coupled Wildfire--Evacuation Simulation for
+             High-Rise Hong Kong},
+  author  = {Lu, Tong and Qin, Sizhong and Tang, Xiyan and Tian, Yuan and Zhang, Yuxin and Huang, Xinyan and Lu, Xinzheng},
+  year    = {2026},
+  note    = {Working paper}
+}</div>
+    <button class="copy-btn" onclick="copyBib(this)">Copy</button>
+  </div>
+</section>
+
+<footer>
+  <p>Tong Lu &middot; The Hong Kong Polytechnic University</p>
+  <p style="margin-top:.5rem"><a href="../../">&larr; Back to portfolio</a></p>
+</footer>
+
+<script>
+function copyBib(btn){
+  navigator.clipboard.writeText(document.getElementById('bib').innerText).then(()=>{
+    btn.textContent='Copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied')},2000)
+  })
+}
+</script>
+</body>
+</html>
