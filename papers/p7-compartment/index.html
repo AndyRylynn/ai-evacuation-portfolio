@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Assisted Fire Compartmentation Design — Tong Lu</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../">&larr; Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#figures">Figures</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#bibtex">BibTeX</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="venue-tag">Advanced Engineering Informatics 2026 &middot; Under review</div>
+  <h1 class="paper-title">Knowledge-Augmented Multimodal Framework for Intelligent Building Fire Compartmentation Design</h1>
+  <p class="authors">
+    <span class="author">Bohuai Yan</span><sup>1,2,#</sup>,&nbsp;
+    <span class="author">Tong Lu</span><sup>1,3,#</sup>,&nbsp;
+    <span class="author">Yifei Ding</span><sup>1,4,*</sup>,&nbsp;
+    <span class="author">Yanfu Zeng</span><sup>5</sup>,&nbsp;
+    <span class="author">Yuxin Zhang</span><sup>1,6</sup>,&nbsp;
+    <span class="author">Xinyan Huang</span><sup>1,2,*</sup>,&nbsp;
+    <span class="author">Xinzheng Lu</span><sup>3</sup>
+  </p>
+  <p class="affiliations">
+    <sup>1</sup> Research Centre for Smart Urban Resilience and Firefighting, Department of Building Environment and Energy Engineering, The Hong Kong Polytechnic University, Hong Kong<br>
+    <sup>2</sup> Research Institute for Sustainable Urban Development, The Hong Kong Polytechnic University, Hong Kong<br>
+    <sup>3</sup> Key Laboratory of Civil Engineering Safety and Durability of Ministry of Education, Tsinghua University, Beijing 100084, China<br>
+    <sup>4</sup> Department of Fire Protection Engineering, University of Maryland, College Park, MD, USA<br>
+    <sup>5</sup> Arup Australia Services Pty Ltd, Sydney, Australia<br>
+    <sup>6</sup> Department of Urban Management, Kyoto University, Kyoto 615-8246, Japan
+  </p>
+  <p class="affiliations" style="margin-top:-1.25rem">
+    <sup>#</sup> Joint first authors, these authors contributed equally to this study. &nbsp;
+    <sup>*</sup> Corresponding authors: <a href="mailto:yding27@umd.edu">yding27@umd.edu</a>, <a href="mailto:xy.huang@polyu.edu.hk">xy.huang@polyu.edu.hk</a>
+  </p>
+  <div class="badges">
+    <a class="badge badge-outline" href="#figures">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Figures
+    </a>
+    <a class="badge badge-outline" href="#videos">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+      Videos
+    </a>
+  </div>
+  <div class="teaser">
+    <img src="teaser.png" alt="Overall framework of the AI-assisted fire compartmentation system">
+    <p class="teaser-caption"><strong>Fig. 1.</strong> Overall framework of the proposed AI-assisted fire compartmentation system — integrating (a) code-grounded rule calculation, (b) CAD processing and architectural recognition, (c) structured EKAP prompting, and (d) an integrated web application with evaluation.</p>
+  </div>
+</div>
+
+<section id="abstract">
+  <h2 class="section-title">Abstract</h2>
+  <p class="abstract">
+    Fire compartmentation design requires coordinated interpretation of building geometry, regulatory requirements, and engineering judgment, relying heavily on manual expert work with high labor and time costs. This study presents a web-based <strong>Engineering Knowledge-Augmented Prompt (EKAP)</strong> framework combining CAD processing, deterministic calculations, structured prompting, and multimodal image generation. Five building floor plans were used to compare image-only generation, generation with regulatory and building information, and generation with the full EKAP framework, producing ten outputs per plan-method combination. The full EKAP method achieved the highest scores across four objective metrics: count-penalized mean Intersection over Union of <strong>71.81%</strong>, count-penalized Boundary F-score of <strong>41.29%</strong>, building-level IoU of <strong>89.02%</strong>, and compartment-count accuracy of <strong>91.80%</strong>. In a separate Analytic Hierarchy Process and Fuzzy Comprehensive Evaluation of 15 selected outputs, the full EKAP method received the highest expert score of <strong>87.28</strong> and the most consistent compartment counts, supporting automated fire compartmentation design and smart fire protection.
+  </p>
+  <div class="highlight-box">
+    <h4>Key Results</h4>
+    <ul>
+      <li><strong>71.81%</strong> count-penalized mIoU — <strong>+33.24</strong> percentage points over image-only generation</li>
+      <li><strong>41.29%</strong> count-penalized Boundary F-score — <strong>+24.15</strong> points over image-only generation</li>
+      <li><strong>89.02%</strong> building-level IoU and <strong>91.80%</strong> compartment-count accuracy (36/50 exact counts)</li>
+      <li><strong>87.28</strong> AHP–FCE expert score — dominant grade <strong>Excellent</strong></li>
+    </ul>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">⚖️</div>
+      <div class="card-title">Code-Grounded Constraints</div>
+      <div class="card-body">Four international codes are compared; GB 50016 provisions are encoded in a Python rule engine that computes the allowable compartment area and minimum compartment count from building attributes.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏗️</div>
+      <div class="card-title">CAD-to-EKAP Pipeline</div>
+      <div class="card-body">DXF parsing extracts walls, windows, doors, and staircases, repairs boundary gaps, and estimates floor area before the EKAP prompt organizes role, knowledge, task, chain-of-thought, and output.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🖥️</div>
+      <div class="card-title">Web App + Expert Evaluation</div>
+      <div class="card-body">An integrated web interface links inputs, deterministic calculations, and Qwen Image 3 generation; 150 outputs and a nine-expert AHP–FCE evaluation validate the workflow.</div>
+    </div>
+  </div>
+</section>
+
+<section id="figures">
+  <h2 class="section-title">Technical Workflow</h2>
+
+  <div class="figure">
+    <img src="fig-rules.png" alt="GB 50016 rule extraction and JSON rule modeling workflow">
+    <p class="fig-note"><strong>Fig. 2.</strong> Workflow for transforming GB 50016 provisions into executable fire-compartmentation constraints.</p>
+  </div>
+
+  <div class="figure">
+    <img src="fig-cad.png" alt="CAD preprocessing and semantic cleaning workflow">
+    <p class="fig-note"><strong>Fig. 3.</strong> CAD preprocessing and semantic cleaning workflow for architectural floor plans.</p>
+  </div>
+
+  <div class="figure">
+    <img src="fig-ekap.png" alt="Construction and organization of the EKAP prompt">
+    <p class="fig-note"><strong>Fig. 4.</strong> Construction and organization of the EKAP prompt for fire-compartmentation generation.</p>
+  </div>
+</section>
+
+<section id="videos">
+  <h2 class="section-title">Demo Video</h2>
+  <div class="videos-grid">
+    <div class="video-card">
+      <div class="video-label">
+        <span class="video-badge">V1</span>
+        <span class="video-title-text">Web-based EKAP Demonstration</span>
+      </div>
+      <video controls preload="metadata">
+        <source src="v1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="fig-note">A 30-second walkthrough from building information and DXF input to a generated fire-compartmentation proposal.</p>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex">
+  <h2 class="section-title">BibTeX</h2>
+  <div style="position:relative">
+    <div class="bibtex-block" id="bib">@article{yan2026compartment,
+  title     = {Knowledge-Augmented Multimodal Framework for Intelligent Building
+               Fire Compartmentation Design},
+  author    = {Yan, Bohuai and Lu, Tong and Ding, Yifei and Zeng, Yanfu and Zhang, Yuxin and Huang, Xinyan and Lu, Xinzheng},
+  journal   = {Advanced Engineering Informatics},
+  year      = {2026},
+  note      = {Under review}
+}</div>
+    <button class="copy-btn" onclick="copyBib(this)">Copy</button>
+  </div>
+</section>
+
+<footer>
+  <p><a href="mailto:yding27@umd.edu">yding27@umd.edu</a> &nbsp;&middot;&nbsp; <a href="mailto:xy.huang@polyu.edu.hk">xy.huang@polyu.edu.hk</a></p>
+  <p style="margin-top:.5rem"><a href="../../">&larr; Back to portfolio</a></p>
+</footer>
+
+<script>
+function copyBib(btn){
+  navigator.clipboard.writeText(document.getElementById('bib').innerText).then(()=>{
+    btn.textContent='Copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied')},2000)
+  })
+}
+</script>
+</body>
+</html>
