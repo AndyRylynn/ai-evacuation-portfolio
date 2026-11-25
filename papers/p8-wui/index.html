@@ -3,15 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WUIEvac — Wildfire Evacuation Simulation for High-Rise Hong Kong</title>
+<title>WUIEvac — Reliability-Based Wildfire Evacuation Simulation for High-Rise WUI Cities — Tong Lu</title>
+<meta name="description" content="Reliability-based, city-scale simulation of coupled wildfire spread and vertical–horizontal evacuation in high-rise wildland–urban interface cities, with a Hong Kong case study.">
 <link rel="stylesheet" href="../../assets/style.css">
 <style>
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin-top:1.5rem}
 .stat{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
 .stat-value{font-size:1.6rem;font-weight:800;color:var(--blue);line-height:1.2}
 .stat-label{font-size:.82rem;color:var(--muted);margin-top:.35rem;line-height:1.5}
-.case-note{font-size:.9rem;color:var(--muted);margin-top:1.1rem;line-height:1.8}
+#overview .stat-grid{grid-template-columns:repeat(3,1fr)}
+.case-group .stat-grid{grid-template-columns:repeat(4,1fr);margin-top:.6rem}
+.case-group{margin-top:1.5rem;border-left:3px solid var(--blue);padding-left:1rem}
+.case-group-title{font-size:.95rem;font-weight:700;color:var(--blue);margin-bottom:.65rem}
+.case-group.hazard{border-left-color:#b45309}
+.case-group.hazard .case-group-title{color:#b45309}
+.case-group.vertical{border-left-color:#1e40af}
+.case-group.horizontal{border-left-color:#047857}
+.case-group.horizontal .case-group-title{color:#047857}
+.case-note{font-size:.9rem;color:var(--muted);margin-top:1.2rem;line-height:1.8}
+.case-flow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.45rem;margin:1.1rem 0 .2rem;font-size:.82rem;color:#374151}
+.case-flow span{background:#fff7ed;border:1px solid #fed7aa;border-radius:999px;padding:.3rem .7rem}
+.case-flow b{color:#9a3412}
+.eq-card{background:#fff;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:10px;padding:1rem 1.2rem;margin-top:1rem}
+.eq-title{font-size:.95rem;font-weight:700;color:var(--blue);margin-bottom:.4rem}
+.eq-block{overflow-x:auto;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.8rem 1rem;margin:.6rem 0}
+.eq-note{font-size:.85rem;color:var(--muted);line-height:1.7}
+.param-wrap{overflow-x:auto;margin-top:1.2rem}
+.param-table{width:100%;border-collapse:collapse;font-size:.86rem}
+.param-table th,.param-table td{border-bottom:1px solid var(--border);padding:.5rem .6rem;text-align:left;vertical-align:top}
+.param-table th{color:var(--blue);font-weight:700;background:var(--bg)}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.2rem}
+.compare-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
+.compare-card h4{font-size:.95rem;color:var(--blue);margin-bottom:.5rem}
+.compare-card ul,.value-card ul{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+.compare-card li,.value-card li{font-size:.85rem;color:#374151;padding-left:.9rem;position:relative;line-height:1.6}
+.compare-card li::before,.value-card li::before{content:"→";position:absolute;left:0;color:var(--blue);font-weight:700}
+.value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.value-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.2rem}
+.value-card h4{font-size:.95rem;color:var(--blue);margin-bottom:.55rem}
+.eq-block mjx-container{max-width:100%}
+.eq-block mjx-container svg{max-width:100%;height:auto}
+.hero.hero-flagship{
+  max-width:none;margin:0;padding:4rem 1.5rem 3rem;color:#111827;
+  background:linear-gradient(135deg,#fffaf5 0%,#fff1e6 55%,#ffe4cc 100%);
+  border-bottom:1px solid #fed7aa;border-radius:0 0 28px 28px;position:relative;overflow:hidden
+}
+.hero-flagship::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 15% 20%,rgba(251,146,60,.18),transparent 35%),
+             radial-gradient(circle at 85% 10%,rgba(239,68,68,.10),transparent 40%)
+}
+.hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
+.hero-flagship .paper-title{color:#111827;max-width:860px}
+.hero-flagship .hero-subtitle{font-size:1rem;color:#57534e;margin:-1rem auto 1.5rem;max-width:760px;line-height:1.6}
+.hero-flagship .authors{color:#57534e}
+.hero-flagship .authors .author{color:#111827}
+.hero-flagship .affiliations{color:#57534e}
+.hero-flagship .affiliations a{color:#c2410c}
+.hero-flagship .venue-tag{background:#ffedd5;color:#9a3412;border:1px solid #fdba74}
+.hero-flagship .badge-primary{background:#9a3412;color:#fff}
+.hero-flagship .badge-outline{background:#fff;color:#1c1917;border-color:#fdba74}
+.hero-flagship .teaser{border-color:#fed7aa;box-shadow:0 24px 60px rgba(120,53,15,.16)}
+.hero-flagship .teaser-caption{background:#fff7ed;color:#57534e;border-top-color:#fed7aa}
+.hero-flagship .teaser-caption strong{color:#111827}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;max-width:820px;margin:1.6rem auto 0}
+.hero-stats>div{background:#fff;border:1px solid #fed7aa;border-radius:10px;padding:.7rem .5rem;text-align:center;box-shadow:0 6px 18px rgba(120,53,15,.06)}
+.hs-value{font-size:1.2rem;font-weight:800;color:#9a3412;line-height:1.2}
+.hs-label{font-size:.7rem;color:#78716c;margin-top:.25rem;line-height:1.35}
+@media(max-width:640px){.compare-grid,.value-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr}.eq-block{font-size:.8em}#overview .stat-grid{grid-template-columns:1fr 1fr}.case-group .stat-grid{grid-template-columns:1fr 1fr}.case-group .stat-value{font-size:1.2rem;white-space:nowrap}}
 </style>
+<script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']]},
+  svg: {fontCache: 'global'}
+};
+</script>
+<script defer src="mathjax/tex-svg.js"></script>
 </head>
 <body>
 <nav>
@@ -20,15 +87,17 @@
     <ul class="nav-links" style="gap:1rem;white-space:nowrap">
       <li><a href="#overview">Overview</a></li>
       <li><a href="#demo">Demo</a></li>
+      <li><a href="#model">Model</a></li>
       <li><a href="#case">Case</a></li>
-      <li><a href="#bibtex">BibTeX</a></li>
     </ul>
   </div>
 </nav>
 
-<div class="hero">
+<div class="hero hero-flagship">
+  <div class="hero-inner">
   <div class="venue-tag">Working paper 2026</div>
-  <h1 class="paper-title">WUIEvac: Coupled Wildfire–Evacuation Simulation for High-Rise Hong Kong</h1>
+  <h1 class="paper-title">WUIEvac: Reliability-Based Assessment of City-Scale Wildfire Evacuation in High-Rise Wildland–Urban Interface Cities</h1>
+  <p class="hero-subtitle">A coupled simulation framework and Hong Kong case study</p>
   <p class="authors">
     <span class="author">Tong Lu</span><sup>1</sup>,
     Sizhong Qin<sup>3</sup>,
@@ -52,31 +121,40 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       Watch demo
     </a>
+    <a class="badge badge-outline" href="#model">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M4 5h16M8 5v14M16 5v14"/></svg>
+      Model
+    </a>
     <a class="badge badge-outline" href="#case">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-5 4 3 5-7"/></svg>
-      Case study
-    </a>
-    <a class="badge badge-outline" href="#framework">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-      Framework
+      Case
     </a>
   </div>
+  <div class="hero-stats">
+    <div><div class="hs-value">79.65 ha</div><div class="hs-label">burned in the Tung Chung case</div></div>
+    <div><div class="hs-value">55</div><div class="hs-label">buildings ≥100 m</div></div>
+    <div><div class="hs-value">78.2%</div><div class="hs-label">residents in ≥100 m towers</div></div>
+    <div><div class="hs-value">31,480</div><div class="hs-label">residents activated</div></div>
+  </div>
   <div class="teaser">
-    <img src="teaser.png" alt="Hong Kong wildfire simulation data viewer">
-    <p class="teaser-caption"><strong>Fig. 1.</strong> The Hong Kong-wide data viewer used by WUIEvac, showing habitat and fuel layers; building, pedestrian, and road-network data feed the coupled simulation downstream.</p>
+    <img src="teaser-fig.jpg" alt="WUIEvac workflow: data viewer, fire spread, pedestrian and vehicle replay">
+    <p class="teaser-caption"><strong>Fig. 1.</strong> WUIEvac workflow: (a) Hong Kong data viewer, (b) 20 h fire spread, (c) pedestrian LTM replay, and (d) vehicle LTM replay.</p>
+  </div>
   </div>
 </div>
 
 <section id="overview">
   <h2 class="section-title">Overview</h2>
   <p class="abstract">
-    Wildland–urban interface (WUI) fires in Hong Kong differ from their low-rise counterparts: dense high-rise towers, steep terrain, and a multimodal transport network mean that evacuation couples <strong>vertical building discharge</strong> with <strong>horizontal pedestrian and vehicle flows</strong>. WUIEvac is a city-scale, risk-informed simulation framework that links a Huygens-based wildfire spread model, census-derived demand, building T–N discharge curves, an LTM pedestrian network with metro exits, and an LTM vehicle network with signal control. The framework is calibrated against satellite-derived burn perimeters from historical Hong Kong wildfires and is used to quantify evacuation reliability under uncertain fire, warning, and demand conditions. The demo shows the complete workflow, from area selection and fire spread to dual-layer evacuation and replay.
+    Wildland–urban interface (WUI) fires in Hong Kong couple dense high-rise towers, steep terrain, and a multimodal transport network, so evacuation is controlled by both <strong>vertical building discharge</strong> and <strong>horizontal pedestrian–vehicle flows</strong>. WUIEvac is a city-scale reliability-assessment framework that links a <strong>10 m Huygens wildfire spread model</strong>, census-derived demand, building T–N discharge curves, a 3DPN pedestrian network with metro exits, and a signal-controlled LTM vehicle network. It has been applied to <strong>six Hong Kong WUI districts</strong> and <strong>24 deterministic scenarios</strong>, calibrated against satellite-derived burn perimeters from <strong>three historical wildfires</strong>, and exercised on a demonstration area with <strong>7,376 buildings and 36,201 network nodes</strong>. In the phased Tung Chung 20 h case, the fire burns <strong>79.65 ha</strong> and produces <strong>421 WUI contact cells</strong>; <strong>55 buildings exceed 100 m and hold 78.2% of residents</strong>. Fire-front activation warns <strong>31,480 residents in three waves</strong>, all of whom clear the area under 100% compliance, while <strong>13 links</strong> exceed 30 min of congestion. The framework is designed to quantify evacuation reliability under uncertain fire, warning, and demand conditions.
   </p>
   <div class="stat-grid">
     <div class="stat"><div class="stat-value">6</div><div class="stat-label">Hong Kong WUI districts modelled</div></div>
+    <div class="stat"><div class="stat-value">24</div><div class="stat-label">Deterministic scenarios</div></div>
     <div class="stat"><div class="stat-value">10 m</div><div class="stat-label">Wildfire spread grid</div></div>
-    <div class="stat"><div class="stat-value">2</div><div class="stat-label">Coupled evacuation layers</div></div>
-    <div class="stat"><div class="stat-value">3</div><div class="stat-label">Historical fires used for calibration</div></div>
+    <div class="stat"><div class="stat-value">3</div><div class="stat-label">Satellite-calibrated fires</div></div>
+    <div class="stat"><div class="stat-value">7,376</div><div class="stat-label">Buildings in demo area</div></div>
+    <div class="stat"><div class="stat-value">36,201</div><div class="stat-label">Network nodes in demo area</div></div>
   </div>
 </section>
 
@@ -97,47 +175,195 @@
   </div>
 </section>
 
-<section id="how">
-  <h2 class="section-title">How It Works</h2>
-  <div class="cards">
-    <div class="card">
-      <div class="card-icon">🔥</div>
-      <div class="card-title">Fire Spread &amp; Calibration</div>
-      <div class="card-body">Rothermel rate of spread on a 10 m raster, propagated with an Eikonal/Huygens front; fuel parameters calibrated on three historical Hong Kong wildfires.</div>
-    </div>
-    <div class="card">
-      <div class="card-icon">🏢</div>
-      <div class="card-title">Vertical + Horizontal Evacuation</div>
-      <div class="card-body">Building T–N curves and stairs release occupants to the 3DPN pedestrian network; walkers can leave the area or enter metro stations, while vehicles use the road network with signal control.</div>
-    </div>
-    <div class="card">
-      <div class="card-icon">📊</div>
-      <div class="card-title">Risk &amp; Management</div>
-      <div class="card-body">Warning waves, T90, congestion, and avoidance are quantified to test warning lead, signal preemption, and metro access.</div>
-    </div>
-  </div>
-</section>
-
-<section id="framework">
-  <h2 class="section-title">Framework</h2>
+<section id="model">
+  <h2 class="section-title">Model &amp; Governing Equations</h2>
+  <p class="abstract">
+    The same equations drive the fire, vertical discharge, network, coupling, and reliability layers. The framework is deliberately transparent: every quantity below can be traced to the implementation, and the parameters marked as assumptions are treated as sensitivity objects in the paper.
+  </p>
   <div class="figure">
     <img src="framework.svg" alt="WUIEvac modelling framework">
     <p class="fig-note">WUIEvac couples hazard, exposure, response, and management layers to produce evacuation reliability metrics.</p>
   </div>
+
+  <div class="eq-card">
+    <div class="eq-title">1 · Fire spread: Rothermel ROS on a Huygens/Eikonal front</div>
+    <div class="eq-block">
+      \[
+      |\nabla T(\mathbf{x})|=\frac{1}{R(\mathbf{x},\theta)},\qquad T(\mathbf{x}_0)=0
+      \]
+      \[
+      R=\begin{cases}R_{\mathrm{Rothermel}},&\beta\le25^\circ\\ R_{\mathrm{TimeWZF}},&\beta>25^\circ\end{cases}
+      \]
+    </div>
+    <p class="eq-note"><strong>T</strong> is the fire arrival time, <strong>R</strong> the rate of spread at bearing θ, and β the slope. The 25° switch follows <code>fire/ros.py</code>; fuel, moisture, wind, and slope enter R.</p>
+  </div>
+
+  <div class="eq-card">
+    <div class="eq-title">2 · Vertical discharge: building T–N curve and stair queue</div>
+    <div class="eq-block">
+      \[
+      D_b(t)=\min\{A_b(t),\;D_b(t-\Delta t)+Q_b\Delta t\}
+      \]
+      \[
+      A_b(t)=\sum_f P_{b,f}F(t-d_{b,f}),\qquad Q_b=w_b q_{\mathrm{flow}}\eta_{\mathrm{merge}}
+      \]
+      \[
+      F(t)=1-\exp\left(-\frac{t^2}{2\sigma^2}\right)
+      \]
+    </div>
+    <p class="eq-note"><strong>D<sub>b</sub></strong> is the cumulative stair release, <strong>A<sub>b</sub></strong> the occupants arriving at the stair, <strong>Q<sub>b</sub></strong> the stair capacity, and <strong>F</strong> the Rayleigh departure curve. This is the vertical stage that traditional low-rise WUI models do not resolve.</p>
+  </div>
+
+  <div class="eq-card">
+    <div class="eq-title">3 · Horizontal network: LTM sending/receiving and signal green</div>
+    <div class="eq-block">
+      \[
+      S_e(t)=\min\{q_e\Delta t,\;U_e(t)-D_e(t-L_e/v_e)\}
+      \]
+      \[
+      R_e(t)=\min\{q_e\Delta t,\;D_e(t+\Delta t-L_e/w_e)+\rho_{j,e}L_e-U_e(t)\}
+      \]
+      \[
+      g_i=g_{\min}+\frac{(C-nI-ng_{\min})w_i}{\sum_j w_j},\qquad g_{\mathrm{eff}}=g-2+1
+      \]
+    </div>
+    <p class="eq-note"><strong>S<sub>e</sub></strong>/<strong>R<sub>e</sub></strong> are the Newell–Daganzo link sending/receiving flows; <strong>g<sub>eff</sub></strong> is the effective green under a 90 s cycle. The same layer supports normal, pre-emption, coordinated, and flashing modes.</p>
+  </div>
+
+  <div class="eq-card">
+    <div class="eq-title">4 · Hazard coupling: threat time, warning, and avoidance</div>
+    <div class="eq-block">
+      \[
+      t_h(p)=\min_{x:\,d(x,p)\le D_{\exp}}t_a(x)
+      \]
+      \[
+      t_w(z)=\max\left\{\min_{b\in z}t_h(b)-T_{\mathrm{lead}},0\right\}
+      \]
+    </div>
+    <p class="eq-note"><strong>t<sub>h</sub></strong> is the earliest fire arrival within the exposure distance; <strong>t<sub>w</sub></strong> is the SSUG warning time. After <strong>t<sub>h</sub>(e)</strong>, a threatened link receives an avoidance penalty in routing while its capacity remains unchanged.</p>
+  </div>
+
+  <div class="eq-card">
+    <div class="eq-title">5 · Reliability and compliance</div>
+    <div class="eq-block">
+      \[
+      R(t^*)=\frac{1}{N}\sum_{i=1}^{N}\mathbf{1}\left[T_{90,i}^{\mathrm{wave}}\le t^*\right]
+      \]
+      \[
+      M_i=t_{\mathrm{fire},i}-(t_{\mathrm{warn},i}+T_{90,i}^{\mathrm{wave}})
+      \]
+      \[
+      N_{\mathrm{evac}}=c\,N_{\mathrm{act}},\qquad c\in[0.46,1.0]
+      \]
+    </div>
+    <p class="eq-note"><strong>R(t*)</strong> is the probability that a warning-wave T90 meets a target; <strong>M<sub>i</sub></strong> is the time margin between fire arrival and evacuation; <strong>c</strong> is the compliance factor (1.0 in the demo, 0.46 in the field-informed bound).</p>
+  </div>
+
+  <div class="param-wrap">
+    <table class="param-table">
+      <thead><tr><th>Parameter</th><th>Value used</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>Fire grid</td><td>10 m</td><td>Rothermel/Eikonal raster</td></tr>
+        <tr><td>Slope switch</td><td>25°</td><td>Rothermel vs Time-WZF</td></tr>
+        <tr><td>Stair descent</td><td>0.5 m/s</td><td>Vertical discharge</td></tr>
+        <tr><td>Unit evacuation flow</td><td>75 p/min/m</td><td>Stair / walkway capacity</td></tr>
+        <tr><td>Signal cycle</td><td>90 s; 5 s intergreen</td><td>Vehicle LTM</td></tr>
+        <tr><td>Departure mode</td><td>1200 s (Rayleigh)</td><td>Household response</td></tr>
+        <tr><td>Warning lead T<sub>lead</sub></td><td>3600 s</td><td>Fire-front activation</td></tr>
+        <tr><td>Exposure distance D<sub>exp</sub></td><td>100 m</td><td>Threat time</td></tr>
+        <tr><td>Avoidance penalty</td><td>3600 s</td><td>Soft fire avoidance</td></tr>
+        <tr><td>Compliance c</td><td>1.0 demo; 0.46 field</td><td>Uncertainty factor</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="eq-note">Signal timing and the Rayleigh departure mode are assumptions to be calibrated; the paper treats them as sensitivity parameters.</p>
 </section>
 
 <section id="case">
-  <h2 class="section-title">Case Study — Tung Chung 20 h Fire</h2>
+  <h2 class="section-title">Case Study — Tung Chung WUI Fire (Phased Activation)</h2>
   <p class="abstract">
-    A 20-hour fire scenario in the Tung Chung WUI district, simulated with the coupled model. The district contains 747 buildings and 78,576 residents; 45,051 residents are warned and 33,525 remain outside the warning footprint. All warned pedestrians and vehicles reach an exit, while 16 pedestrian links and 3 vehicle links exceed 30 minutes of congestion.
+    A 20-hour fire in the Tung Chung WUI burned <strong>79.65 ha</strong> and produced <strong>421 WUI contact cells</strong>. The fire front activates three SSUG zones in sequence between 2.6 h and 11.1 h, rather than evacuating the whole district at once. The district contains 747 buildings and 78,576 residents; <strong>55 buildings exceed 100 m and hold 78.2% of residents</strong>.
   </p>
-  <div class="stat-grid">
-    <div class="stat"><div class="stat-value">747</div><div class="stat-label">Buildings modelled</div></div>
-    <div class="stat"><div class="stat-value">45,051</div><div class="stat-label">Residents warned</div></div>
-    <div class="stat"><div class="stat-value">100%</div><div class="stat-label">Evacuation success (warned population)</div></div>
-    <div class="stat"><div class="stat-value">19</div><div class="stat-label">Congestion hotspots (16 pedestrian + 3 vehicle)</div></div>
+  <div class="case-flow">
+    <span>Fire front</span><b>&rarr;</b><span>Vertical T–N / stairs</span><b>&rarr;</b><span>3DPN + metro</span><b>&rarr;</b><span>Signal-controlled vehicles</span>
   </div>
-  <p class="case-note">Three SSUG zones are warned between 2.6 h and 11.1 h after ignition. Metrics are from the coupled demonstration run; warning-wave timing, rather than the ignition clock, is used in the paper to separate fire arrival from evacuation performance.</p>
+
+  <div class="case-group hazard">
+    <div class="case-group-title">Hazard</div>
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-value">79.65 ha</div><div class="stat-label">Burned area</div></div>
+      <div class="stat"><div class="stat-value">421</div><div class="stat-label">WUI contact cells</div></div>
+      <div class="stat"><div class="stat-value">20 h</div><div class="stat-label">Fire duration</div></div>
+      <div class="stat"><div class="stat-value">3</div><div class="stat-label">SSUG zones activated (2.6–11.1 h)</div></div>
+    </div>
+  </div>
+
+  <div class="case-group vertical">
+    <div class="case-group-title">Vertical evacuation</div>
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-value">747</div><div class="stat-label">Buildings modelled</div></div>
+      <div class="stat"><div class="stat-value">55</div><div class="stat-label">Buildings ≥100 m</div></div>
+      <div class="stat"><div class="stat-value">78.2%</div><div class="stat-label">Residents in ≥100 m buildings</div></div>
+      <div class="stat"><div class="stat-value">36 / 68 min</div><div class="stat-label">Vertical release p50 / p90</div></div>
+    </div>
+  </div>
+
+  <div class="case-group horizontal">
+    <div class="case-group-title">Horizontal evacuation</div>
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-value">31,480</div><div class="stat-label">Residents activated</div></div>
+      <div class="stat"><div class="stat-value">47,096</div><div class="stat-label">Not activated</div></div>
+      <div class="stat"><div class="stat-value">100%*</div><div class="stat-label">Evacuation success (activated)</div></div>
+      <div class="stat"><div class="stat-value">13</div><div class="stat-label">Congestion hotspots (11 pedestrian + 2 vehicle)</div></div>
+    </div>
+  </div>
+
+  <div class="compare-grid">
+    <div class="compare-card">
+      <h4>Traditional low-rise WUI</h4>
+      <ul>
+        <li>Horizontal vehicle and pedestrian flow dominates.</li>
+        <li>A single-layer road or walking network.</li>
+        <li>Departure from low-rise buildings.</li>
+        <li>No vertical stair discharge or metro access.</li>
+      </ul>
+    </div>
+    <div class="compare-card">
+      <h4>High-rise Hong Kong (this work)</h4>
+      <ul>
+        <li>55 buildings ≥100 m hold 78.2% of residents.</li>
+        <li>Vertical T–N / stair discharge before street flow.</li>
+        <li>3DPN + metro exits + signal-controlled vehicle LTM.</li>
+        <li>Fire-front phased activation of SSUG zones.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="case-note">* The demo scenario assumes 100% compliance among activated residents. Field WUI compliance can be much lower (e.g., ~46% in the Kincade Fire GPS study), so these numbers are an upper bound; the paper treats compliance as an uncertainty factor. The scenario activates only fire-front zones, not the whole district. It is a demonstration scenario; final ensemble results will replace it.</p>
+</section>
+
+<section id="value">
+  <h2 class="section-title">Operational Value</h2>
+  <div class="value-grid">
+    <div class="value-card">
+      <h4>Emergency management &amp; resource allocation</h4>
+      <ul>
+        <li>Map not-activated and short-lead zones before the fire front arrives.</li>
+        <li>Rank high-rise clusters and bottleneck links for traffic police, evacuation buses, and metro staff.</li>
+        <li>Test warning lead, signal pre-emption/coordination, metro access, and bus staging before an event.</li>
+        <li>Use the replay and warning-wave timing for multi-agency briefing and resource allocation.</li>
+      </ul>
+    </div>
+    <div class="value-card">
+      <h4>Open science (planned)</h4>
+      <ul>
+        <li>Code and scenario library planned for open-source release with the paper.</li>
+        <li>Transparent equations and reproducible scenarios for audit and training.</li>
+        <li>Local deployment; no proprietary simulation license.</li>
+        <li>Extensible to other high-rise WUI cities and transport networks.</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <section id="research">
@@ -145,9 +371,9 @@
   <div class="highlight-box">
     <h4>Working paper — target: Reliability Engineering &amp; System Safety</h4>
     <ul>
-      <li>First coupled high-rise WUI framework linking Huygens wildfire spread, vertical building discharge, pedestrian and vehicle LTM, metro exits, and signal control.</li>
+      <li>First coupled high-rise WUI framework linking Huygens wildfire spread, vertical T–N discharge, pedestrian and vehicle LTM, metro exits, and signal control.</li>
       <li>Fire model calibrated against satellite-derived burn perimeters from three historical Hong Kong wildfires.</li>
-      <li>Reliability assessment under uncertain fire, warning, and demand conditions, with sensitivity analysis and management-strategy evaluation.</li>
+      <li>Reliability assessment under uncertain fire, warning, demand, and compliance; phased activation and management strategies are evaluated separately.</li>
     </ul>
   </div>
 </section>
@@ -156,8 +382,8 @@
   <h2 class="section-title">BibTeX</h2>
   <div style="position:relative">
     <div class="bibtex-block" id="bib">@unpublished{lu2026wuievac,
-  title   = {WUIEvac: Coupled Wildfire--Evacuation Simulation for
-             High-Rise Hong Kong},
+  title   = {WUIEvac: Reliability-Based Assessment of City-Scale Wildfire
+             Evacuation in High-Rise Wildland--Urban Interface Cities},
   author  = {Lu, Tong and Qin, Sizhong and Tang, Xiyan and Tian, Yuan and Zhang, Yuxin and Huang, Xinyan and Lu, Xinzheng},
   year    = {2026},
   note    = {Working paper}
