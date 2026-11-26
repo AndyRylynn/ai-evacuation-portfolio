@@ -93,6 +93,7 @@
 .cal-panel figcaption{font-size:.82rem;line-height:1.45;color:#4b5563;margin-top:.3rem}
 .cal-legend{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .7rem;font-size:.78rem;color:var(--muted);margin-top:.75rem}
 .cal-legend span{display:inline-flex;align-items:center;gap:.25rem}
+.cal-legend-label{font-weight:700;color:#374151}
 .cal-dot{width:.6rem;height:.6rem;border-radius:50%;display:inline-block}
 .cal-dot.hit{background:#34c759}
 .cal-dot.over{background:#ff3b30}
@@ -309,11 +310,11 @@ window.MathJax = {
         <div class="cal-panels">
           <figure class="cal-panel">
             <img src="cal-2021-observed.jpg" alt="Observed burn perimeter, 2021 Castle Peak" loading="lazy" decoding="async">
-            <figcaption>Observed perimeter</figcaption>
+            <figcaption>Observed perimeter (blue)</figcaption>
           </figure>
           <figure class="cal-panel">
             <img src="cal-2021-simulated.jpg" alt="Simulated burn perimeter with rho, 2021 Castle Peak" loading="lazy" decoding="async">
-            <figcaption>Simulated with ρ</figcaption>
+            <figcaption>Simulated with ρ (red)</figcaption>
           </figure>
           <figure class="cal-panel">
             <img src="cal-2021-agreement.jpg" alt="Agreement map, 2021 Castle Peak" loading="lazy" decoding="async">
@@ -327,11 +328,11 @@ window.MathJax = {
         <div class="cal-panels">
           <figure class="cal-panel">
             <img src="cal-2017-observed.jpg" alt="Observed burn perimeter, 2017 Kai Kung Leng" loading="lazy" decoding="async">
-            <figcaption>Observed perimeter</figcaption>
+            <figcaption>Observed perimeter (blue)</figcaption>
           </figure>
           <figure class="cal-panel">
             <img src="cal-2017-simulated.jpg" alt="Simulated burn perimeter with rho, 2017 Kai Kung Leng" loading="lazy" decoding="async">
-            <figcaption>Simulated with ρ</figcaption>
+            <figcaption>Simulated with ρ (red)</figcaption>
           </figure>
           <figure class="cal-panel">
             <img src="cal-2017-agreement.jpg" alt="Agreement map, 2017 Kai Kung Leng" loading="lazy" decoding="async">
@@ -340,6 +341,7 @@ window.MathJax = {
         </div>
       </div>
       <div class="cal-legend">
+        <span class="cal-legend-label">Agreement colors:</span>
         <span><i class="cal-dot hit"></i>Hit</span>
         <span><i class="cal-dot over"></i>Over-burn</span>
         <span><i class="cal-dot miss"></i>Missed</span>
