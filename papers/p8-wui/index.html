@@ -80,6 +80,25 @@
 .fw-levers-title{font-size:.71rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#1d4ed8;margin-right:.15rem}
 .fw-pill{font-size:.79rem;line-height:1.35;color:#1e3a8a;background:#fff;border:1px solid #bfdbfe;border-radius:999px;padding:.18rem .55rem;white-space:nowrap}
 .fw-caption{margin:0;padding:.7rem .85rem .8rem;border-top:1px solid var(--border);font-size:.86rem;line-height:1.6;color:var(--muted)}
+.cal-figure{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.cal-fire{margin-top:1rem}
+.cal-fire:first-child{margin-top:0}
+.cal-head{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .65rem}
+.cal-name{font-size:.95rem;font-weight:700;color:#111827}
+.cal-ssc{font-size:.78rem;font-weight:700;color:#9a3412;background:#fff7ed;border:1px solid #fed7aa;border-radius:999px;padding:.12rem .5rem}
+.cal-meta{font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.cal-panels{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.55rem}
+.cal-panel{min-width:0}
+.cal-panel img{width:100%;display:block;border:1px solid var(--border);border-radius:8px;background:#fff}
+.cal-panel figcaption{font-size:.82rem;line-height:1.45;color:#4b5563;margin-top:.3rem}
+.cal-legend{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .7rem;font-size:.78rem;color:var(--muted);margin-top:.75rem}
+.cal-legend span{display:inline-flex;align-items:center;gap:.25rem}
+.cal-dot{width:.6rem;height:.6rem;border-radius:50%;display:inline-block}
+.cal-dot.hit{background:#34c759}
+.cal-dot.over{background:#ff3b30}
+.cal-dot.miss{background:#2f6bff}
+.cal-star{color:#65a30d;font-size:.9rem;line-height:1}
+.cal-caption{font-size:.85rem;line-height:1.65;color:var(--muted);margin-top:.8rem;padding-top:.7rem;border-top:1px solid var(--border)}
 @media(max-width:860px){
   .fw-flow{flex-direction:column;gap:.3rem;padding:.85rem}
   .fw-stage{padding:.9rem 1rem}
@@ -91,6 +110,12 @@
   .fw-levers-title{flex-basis:100%;margin-right:0}
   .fw-pill{font-size:.82rem;white-space:normal}
   .fw-caption{font-size:.88rem}
+}
+@media(max-width:640px){
+  .cal-panels{grid-template-columns:1fr}
+  .cal-name{font-size:1rem}
+  .cal-panel figcaption{font-size:.85rem}
+  .cal-caption{font-size:.88rem}
 }
 @media(max-width:640px){.compare-grid,.value-grid{grid-template-columns:1fr}.eq-block{font-size:.8em}#overview .stat-grid{grid-template-columns:1fr 1fr}.case-group .stat-grid{grid-template-columns:1fr 1fr}.case-group .stat-value{font-size:1.2rem;white-space:nowrap}}
 </style>
@@ -161,7 +186,7 @@ window.MathJax = {
 <section id="overview">
   <h2 class="section-title">Overview</h2>
   <p class="abstract">
-    Wildland–urban interface (WUI) fires in Hong Kong couple dense high-rise towers, steep terrain, and a multimodal transport network, so evacuation is controlled by both <strong>vertical building discharge</strong> and <strong>horizontal pedestrian–vehicle flows</strong>. WUIEvac is a city-scale reliability-assessment framework that links a <strong>10 m Huygens wildfire spread model</strong>, census-derived demand, building T–N discharge curves, a 3DPN pedestrian network with metro exits, and a signal-controlled LTM vehicle network. It has been applied to <strong>six Hong Kong WUI districts</strong> and <strong>24 deterministic scenarios</strong>, calibrated against satellite-derived burn perimeters from <strong>three historical wildfires</strong> (<strong>78% best calibration accuracy</strong>).
+    Wildland–urban interface (WUI) fires in Hong Kong couple dense high-rise towers, steep terrain, and a multimodal transport network, so evacuation is controlled by both <strong>vertical building discharge</strong> and <strong>horizontal pedestrian–vehicle flows</strong>. WUIEvac is a city-scale reliability-assessment framework that links a <strong>10 m Huygens wildfire spread model</strong>, census-derived demand, building T–N discharge curves, a 3DPN pedestrian network with metro exits, and a signal-controlled LTM vehicle network. It has been applied to <strong>six Hong Kong WUI districts</strong> and <strong>24 deterministic scenarios</strong>, calibrated against satellite-derived burn perimeters from the <strong>2021 Castle Peak and 2017 Kai Kung Leng wildfires</strong>, reaching <strong>87.1% best fire-shape agreement (SSC = 0.871)</strong>.
   </p>
   <p class="abstract" style="margin-top:1rem">
     The evacuation layer achieves <strong>86% T90 accuracy on eight held-out WUI scenarios</strong>, benchmarked against high-fidelity building-plus-road simulations and cross-checked by expert AHP–FCE review. A <strong>7,415-building coupled run and wildfire simulation completes in about 73 s on a single workstation</strong>.
@@ -173,7 +198,7 @@ window.MathJax = {
     <div class="stat"><div class="stat-value">6</div><div class="stat-label">Hong Kong WUI districts modelled</div></div>
     <div class="stat"><div class="stat-value">24</div><div class="stat-label">Deterministic scenarios</div></div>
     <div class="stat"><div class="stat-value">10 m</div><div class="stat-label">Wildfire spread grid</div></div>
-    <div class="stat"><div class="stat-value">78%</div><div class="stat-label">Fire calibration accuracy (best of 3 fires)</div></div>
+    <div class="stat"><div class="stat-value">87.1%</div><div class="stat-label">Best fire-shape agreement (SSC, 2 fires)</div></div>
     <div class="stat"><div class="stat-value">86%</div><div class="stat-label">Evacuation prediction accuracy (held-out T90)</div></div>
     <div class="stat"><div class="stat-value">73 s</div><div class="stat-label">7,415-building coupled run and wildfire</div></div>
   </div>
@@ -219,7 +244,7 @@ window.MathJax = {
         <ul>
           <li>Rothermel rate of spread</li>
           <li>10 m Huygens front</li>
-          <li>TCA + 3-fire calibration</li>
+          <li>TCA + 2-fire calibration</li>
         </ul>
       </article>
       <div class="fw-arrow" aria-hidden="true"><span>&rarr;</span></div>
@@ -277,6 +302,51 @@ window.MathJax = {
       \]
     </div>
     <p class="eq-note"><strong>T</strong> is the fire arrival time, <strong>R</strong> the rate of spread at bearing θ, and β the slope. The 25° switch follows <code>fire/ros.py</code>; fuel, moisture, wind, and slope enter R.</p>
+    <div class="cal-figure">
+      <div class="cal-fire">
+        <div class="cal-head"><span class="cal-name">2021 Castle Peak</span><span class="cal-ssc">SSC 0.871</span></div>
+        <div class="cal-meta">627 ha observed · 653 ha simulated</div>
+        <div class="cal-panels">
+          <figure class="cal-panel">
+            <img src="cal-2021-observed.jpg" alt="Observed burn perimeter, 2021 Castle Peak" loading="lazy" decoding="async">
+            <figcaption>Observed perimeter</figcaption>
+          </figure>
+          <figure class="cal-panel">
+            <img src="cal-2021-simulated.jpg" alt="Simulated burn perimeter with rho, 2021 Castle Peak" loading="lazy" decoding="async">
+            <figcaption>Simulated with ρ</figcaption>
+          </figure>
+          <figure class="cal-panel">
+            <img src="cal-2021-agreement.jpg" alt="Agreement map, 2021 Castle Peak" loading="lazy" decoding="async">
+            <figcaption>Agreement map · hit 560 / over 93 / missed 67 ha</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="cal-fire">
+        <div class="cal-head"><span class="cal-name">2017 Kai Kung Leng</span><span class="cal-ssc">SSC 0.865</span></div>
+        <div class="cal-meta">143 ha observed · 152 ha simulated</div>
+        <div class="cal-panels">
+          <figure class="cal-panel">
+            <img src="cal-2017-observed.jpg" alt="Observed burn perimeter, 2017 Kai Kung Leng" loading="lazy" decoding="async">
+            <figcaption>Observed perimeter</figcaption>
+          </figure>
+          <figure class="cal-panel">
+            <img src="cal-2017-simulated.jpg" alt="Simulated burn perimeter with rho, 2017 Kai Kung Leng" loading="lazy" decoding="async">
+            <figcaption>Simulated with ρ</figcaption>
+          </figure>
+          <figure class="cal-panel">
+            <img src="cal-2017-agreement.jpg" alt="Agreement map, 2017 Kai Kung Leng" loading="lazy" decoding="async">
+            <figcaption>Agreement map · hit 128 / over 25 / missed 15 ha</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="cal-legend">
+        <span><i class="cal-dot hit"></i>Hit</span>
+        <span><i class="cal-dot over"></i>Over-burn</span>
+        <span><i class="cal-dot miss"></i>Missed</span>
+        <span><span class="cal-star">★</span> Ignition</span>
+      </div>
+      <p class="cal-caption"><strong>Fig. 3.</strong> Observed vs ρ-constrained simulated burn perimeters for the two calibration fires. SSC = 0.871 for Castle Peak (627 ha observed, 653 ha simulated) and 0.865 for Kai Kung Leng (143 ha observed, 152 ha simulated). ρ is a per-cell rate multiplier inferred from the observed perimeter and smoothed at 100 m.</p>
+    </div>
   </div>
 
   <div class="eq-card">
@@ -361,7 +431,7 @@ window.MathJax = {
 
   <div class="eq-card">
     <div class="eq-title">Validation · calibration and prediction accuracy</div>
-    <p class="eq-note"><strong>Fire calibration.</strong> Satellite-derived dNBR perimeters from three historical fires are compared with simulated burn scars; shape similarity, false-alarm/missing ratios, and burn-area agreement are combined into a calibration score, with a best value of <strong>78%</strong>.</p>
+    <p class="eq-note"><strong>Fire calibration.</strong> Satellite-derived dNBR perimeters from the 2021 Castle Peak and 2017 Kai Kung Leng fires are compared with simulations under the ρ-constrained calibration; shape similarity reaches <strong>SSC = 0.871</strong> and <strong>0.865</strong>, with a best of <strong>87.1%</strong>.</p>
     <div class="eq-block">
       \[
       A_e=100\left(1-\frac{1}{N}\sum_{i=1}^{N}\frac{|T_{90,i}^{\mathrm{LTM}}-T_{90,i}^{\mathrm{bench}}|}{T_{90,i}^{\mathrm{bench}}}\right)
@@ -464,7 +534,7 @@ window.MathJax = {
     <h4>Working paper — target: Reliability Engineering &amp; System Safety</h4>
     <ul>
       <li>First coupled high-rise WUI framework linking Huygens wildfire spread, vertical T–N discharge, pedestrian and vehicle LTM, metro exits, and signal control.</li>
-      <li>Fire model calibrated against satellite-derived burn perimeters from three historical Hong Kong wildfires.</li>
+      <li>Fire model calibrated against satellite-derived burn perimeters from the 2021 Castle Peak and 2017 Kai Kung Leng wildfires, reaching SSC = 0.871 under a ρ-constrained calibration.</li>
       <li>Reliability assessment under uncertain fire, warning, demand, and compliance; phased activation and management strategies are evaluated separately.</li>
     </ul>
   </div>
