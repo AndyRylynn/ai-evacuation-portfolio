@@ -28,10 +28,6 @@
 .eq-title{font-size:.95rem;font-weight:700;color:var(--blue);margin-bottom:.4rem}
 .eq-block{overflow-x:auto;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.8rem 1rem;margin:.6rem 0}
 .eq-note{font-size:.85rem;color:var(--muted);line-height:1.7}
-.param-wrap{overflow-x:auto;margin-top:1.2rem}
-.param-table{width:100%;border-collapse:collapse;font-size:.86rem}
-.param-table th,.param-table td{border-bottom:1px solid var(--border);padding:.5rem .6rem;text-align:left;vertical-align:top}
-.param-table th{color:var(--blue);font-weight:700;background:var(--bg)}
 .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.2rem}
 .compare-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
 .compare-card h4{font-size:.95rem;color:var(--blue);margin-bottom:.5rem}
@@ -199,13 +195,7 @@ window.MathJax = {
 <section id="overview">
   <h2 class="section-title">Overview</h2>
   <p class="abstract">
-    Wildland–urban interface (WUI) fires in Hong Kong couple dense high-rise towers, steep terrain, and a multimodal transport network, so evacuation is controlled by both <strong>vertical building discharge</strong> and <strong>horizontal pedestrian–vehicle flows</strong>. WUIEvac is a city-scale reliability-assessment framework that links a <strong>10 m Huygens wildfire spread model</strong>, census-derived demand, building T–N discharge curves, a 3DPN pedestrian network with metro exits, and a signal-controlled LTM vehicle network. It has been applied to <strong>six Hong Kong WUI districts</strong> and <strong>24 deterministic scenarios</strong>, calibrated against satellite-derived burn perimeters from the <strong>2021 Castle Peak and 2017 Kai Kung Leng wildfires</strong>, reaching <strong>87.1% best fire-shape agreement (SSC = 0.871)</strong>.
-  </p>
-  <p class="abstract" style="margin-top:1rem">
-    The evacuation layer achieves <strong>86% T90 accuracy on eight held-out WUI scenarios</strong>, benchmarked against high-fidelity building-plus-road simulations and cross-checked by expert AHP–FCE review. A <strong>7,415-building coupled run and wildfire simulation completes in about 73 s on a single workstation</strong>.
-  </p>
-  <p class="abstract" style="margin-top:1rem">
-    In the phased Tung Chung 20 h case, the fire burns <strong>79.65 ha</strong> and produces <strong>421 WUI contact cells</strong>; <strong>55 buildings exceed 100 m and hold 78.2% of residents</strong>. Fire-front activation warns <strong>31,480 residents in three waves</strong>; <strong>100% of activated residents</strong> clear the area under the 100% compliance assumption, while <strong>13 links</strong> exceed 30 min of congestion. The framework is designed to quantify evacuation reliability under uncertain fire, warning, and demand conditions.
+    Wildland–urban interface (WUI) fires in Hong Kong couple dense high-rise towers, steep terrain, and a multimodal transport network, so evacuation is controlled by both <strong>vertical building discharge</strong> and <strong>horizontal pedestrian–vehicle flows</strong>. WUIEvac is a city-scale reliability-assessment framework linking a <strong>10 m Huygens wildfire spread model</strong>, census-derived demand, building T–N discharge curves, a 3DPN pedestrian network with metro exits, and a signal-controlled LTM vehicle network. Applied to <strong>six Hong Kong WUI districts</strong> and <strong>24 deterministic scenarios</strong>, it is calibrated on real historical wildfire data to <strong>87.1% best SSC</strong> and achieves <strong>86% T90 accuracy on eight held-out scenarios</strong>, while a <strong>7,415-building coupled run and wildfire simulation completes in about 73 s</strong>. In the phased Tung Chung 20 h case, the fire burns <strong>79.65 ha</strong> and produces <strong>421 WUI contact cells</strong>; <strong>55 buildings exceed 100 m and hold 78.2% of residents</strong>. Fire-front activation warns <strong>31,480 residents in three waves</strong>; <strong>100% of activated residents</strong> clear the area under the compliance assumption, while <strong>13 links</strong> exceed 30 min of congestion.
   </p>
   <div class="stat-grid">
     <div class="stat"><div class="stat-value">6</div><div class="stat-label">Hong Kong WUI districts modelled</div></div>
@@ -237,7 +227,7 @@ window.MathJax = {
 <section id="model">
   <h2 class="section-title">Model &amp; Governing Equations</h2>
   <p class="abstract">
-    The same equations drive the fire, vertical discharge, network, coupling, and reliability layers. The framework is deliberately transparent: every quantity below can be traced to the implementation, and the parameters marked as assumptions are treated as sensitivity objects in the paper.
+    The same equations drive the fire, vertical discharge, network, coupling, and reliability layers. The framework is deliberately transparent: every quantity below can be traced to the implementation, and model assumptions are treated as sensitivity objects in the paper.
   </p>
   <div class="framework" role="group" aria-label="WUIEvac modelling framework">
     <div class="fw-flow">
@@ -438,25 +428,6 @@ window.MathJax = {
     <p class="eq-note"><strong>R(t*)</strong> is the probability that a warning-wave T90 meets a target; <strong>M<sub>i</sub></strong> is the time margin between fire arrival and evacuation; <strong>c</strong> is the compliance factor (1.0 in the demo, 0.46 in the field-informed bound).</p>
   </div>
 
-  <div class="param-wrap">
-    <table class="param-table">
-      <thead><tr><th>Parameter</th><th>Value used</th><th>Role</th></tr></thead>
-      <tbody>
-        <tr><td>Fire grid</td><td>10 m</td><td>Rothermel/Eikonal raster</td></tr>
-        <tr><td>Slope switch</td><td>25°</td><td>Rothermel vs Time-WZF</td></tr>
-        <tr><td>Stair descent</td><td>0.5 m/s</td><td>Vertical discharge</td></tr>
-        <tr><td>Unit evacuation flow</td><td>75 p/min/m</td><td>Stair / walkway capacity</td></tr>
-        <tr><td>Signal cycle</td><td>90 s; 5 s intergreen</td><td>Vehicle LTM</td></tr>
-        <tr><td>Departure mode</td><td>1200 s (Rayleigh)</td><td>Household response</td></tr>
-        <tr><td>Warning lead T<sub>lead</sub></td><td>3600 s</td><td>Fire-front activation</td></tr>
-        <tr><td>Exposure distance D<sub>exp</sub></td><td>100 m</td><td>Threat time</td></tr>
-        <tr><td>Avoidance penalty</td><td>3600 s</td><td>Soft fire avoidance</td></tr>
-        <tr><td>Compliance c</td><td>1.0 demo; 0.46 field</td><td>Uncertainty factor</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="eq-note">Signal timing and the Rayleigh departure mode are assumptions to be calibrated; the paper treats them as sensitivity parameters.</p>
-
   <div class="eq-card">
     <div class="eq-title">Validation · calibration and prediction accuracy</div>
     <p class="eq-note"><strong>Fire calibration.</strong> Satellite-derived dNBR perimeters from the 2021 Castle Peak and 2017 Kai Kung Leng fires are compared with simulations under the ρ-constrained calibration; shape similarity reaches <strong>SSC = 0.871</strong> and <strong>0.865</strong>, with a best of <strong>87.1%</strong>.</p>
@@ -547,7 +518,7 @@ window.MathJax = {
     <div class="value-card">
       <h4>Open science (planned)</h4>
       <ul>
-        <li>Code and scenario library planned for open-source release with the paper.</li>
+        <li>Code, calibrated model parameters, and the scenario library are planned for open-source release with the paper.</li>
         <li>Transparent equations and reproducible scenarios for audit and training.</li>
         <li>Local deployment; no proprietary simulation license.</li>
         <li>Extensible to other high-rise WUI cities and transport networks.</li>
