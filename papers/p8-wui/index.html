@@ -66,6 +66,32 @@
 .hero-flagship .teaser{border-color:#fed7aa;box-shadow:0 24px 60px rgba(120,53,15,.16)}
 .hero-flagship .teaser-caption{background:#fff7ed;color:#57534e;border-top-color:#fed7aa}
 .hero-flagship .teaser-caption strong{color:#111827}
+.framework{margin-top:2rem;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff}
+.fw-flow{display:flex;align-items:stretch;gap:.35rem;padding:1rem .8rem .9rem;background:linear-gradient(180deg,#f8fafc,#fff)}
+.fw-stage{flex:1 1 0;min-width:0;background:#fff;border:1px solid var(--border);border-radius:10px;padding:.8rem .7rem}
+.fw-step{font-size:.71rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);line-height:1.1}
+.fw-stage h3{font-size:.92rem;line-height:1.3;margin:.35rem 0 .5rem;color:#111827}
+.fw-stage ul{list-style:none;margin:0;padding:0;display:grid;gap:.28rem}
+.fw-stage li{position:relative;padding-left:.7rem;font-size:.85rem;line-height:1.45;color:#374151;overflow-wrap:break-word}
+.fw-stage li::before{content:"";position:absolute;left:0;top:.55em;width:4px;height:4px;border-radius:50%;background:#93c5fd}
+.fw-arrow{flex:0 0 14px;display:flex;align-items:center;justify-content:center;color:#64748b;font-size:1.15rem;line-height:1;font-weight:700}
+.fw-arrow span{display:block;line-height:1}
+.fw-levers{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .45rem;padding:.7rem .85rem;background:#eff6ff;border-top:1px solid #dbeafe}
+.fw-levers-title{font-size:.71rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#1d4ed8;margin-right:.15rem}
+.fw-pill{font-size:.79rem;line-height:1.35;color:#1e3a8a;background:#fff;border:1px solid #bfdbfe;border-radius:999px;padding:.18rem .55rem;white-space:nowrap}
+.fw-caption{margin:0;padding:.7rem .85rem .8rem;border-top:1px solid var(--border);font-size:.86rem;line-height:1.6;color:var(--muted)}
+@media(max-width:860px){
+  .fw-flow{flex-direction:column;gap:.3rem;padding:.85rem}
+  .fw-stage{padding:.9rem 1rem}
+  .fw-step{font-size:.74rem}
+  .fw-stage h3{font-size:1rem;margin:.25rem 0 .5rem}
+  .fw-stage li{font-size:.92rem;line-height:1.5}
+  .fw-arrow{flex:0 0 16px;height:16px;font-size:1rem}
+  .fw-arrow span{transform:rotate(90deg)}
+  .fw-levers-title{flex-basis:100%;margin-right:0}
+  .fw-pill{font-size:.82rem;white-space:normal}
+  .fw-caption{font-size:.88rem}
+}
 @media(max-width:640px){.compare-grid,.value-grid{grid-template-columns:1fr}.eq-block{font-size:.8em}#overview .stat-grid{grid-template-columns:1fr 1fr}.case-group .stat-grid{grid-template-columns:1fr 1fr}.case-group .stat-value{font-size:1.2rem;white-space:nowrap}}
 </style>
 <script>
@@ -175,9 +201,69 @@ window.MathJax = {
   <p class="abstract">
     The same equations drive the fire, vertical discharge, network, coupling, and reliability layers. The framework is deliberately transparent: every quantity below can be traced to the implementation, and the parameters marked as assumptions are treated as sensitivity objects in the paper.
   </p>
-  <div class="figure">
-    <img src="framework.svg" alt="WUIEvac modelling framework">
-    <p class="fig-note">WUIEvac couples hazard, exposure, response, and management layers to produce evacuation reliability metrics.</p>
+  <div class="framework" role="group" aria-label="WUIEvac modelling framework">
+    <div class="fw-flow">
+      <article class="fw-stage">
+        <div class="fw-step">01 · Inputs</div>
+        <h3>Data &amp; exposure</h3>
+        <ul>
+          <li>Terrain, fuel, ERA5 wind</li>
+          <li>Buildings &amp; population</li>
+          <li>3DPN, roads, metro</li>
+        </ul>
+      </article>
+      <div class="fw-arrow" aria-hidden="true"><span>&rarr;</span></div>
+      <article class="fw-stage">
+        <div class="fw-step">02 · Hazard</div>
+        <h3>Fire spread</h3>
+        <ul>
+          <li>Rothermel rate of spread</li>
+          <li>10 m Huygens front</li>
+          <li>TCA + 3-fire calibration</li>
+        </ul>
+      </article>
+      <div class="fw-arrow" aria-hidden="true"><span>&rarr;</span></div>
+      <article class="fw-stage">
+        <div class="fw-step">03 · Coupling</div>
+        <h3>Hazard coupling</h3>
+        <ul>
+          <li>Arrival time per cell/link</li>
+          <li>Threat time within D_exp</li>
+          <li>Warning lead T_lead</li>
+          <li>Soft avoidance penalty</li>
+        </ul>
+      </article>
+      <div class="fw-arrow" aria-hidden="true"><span>&rarr;</span></div>
+      <article class="fw-stage">
+        <div class="fw-step">04 · Response</div>
+        <h3>Dual-layer evacuation</h3>
+        <ul>
+          <li>Building T–N &amp; stairs</li>
+          <li>Pedestrian LTM + 3DPN/MTR</li>
+          <li>Vehicle LTM + signals</li>
+        </ul>
+      </article>
+      <div class="fw-arrow" aria-hidden="true"><span>&rarr;</span></div>
+      <article class="fw-stage">
+        <div class="fw-step">05 · Assessment</div>
+        <h3>Reliability</h3>
+        <ul>
+          <li>T50 / T90 / T100</li>
+          <li>Warned vs not warned</li>
+          <li>Congestion &amp; time margin</li>
+          <li>Morris / Sobol sensitivity</li>
+        </ul>
+      </article>
+    </div>
+    <div class="fw-levers">
+      <span class="fw-levers-title">Management levers</span>
+      <span class="fw-pill">Warning lead</span>
+      <span class="fw-pill">Phased activation</span>
+      <span class="fw-pill">Signal preemption</span>
+      <span class="fw-pill">Metro access</span>
+      <span class="fw-pill">Avoidance penalty</span>
+    </div>
+    <p class="fw-caption"><strong>Fig. 2.</strong> WUIEvac couples hazard, exposure, response, and management layers to produce evacuation reliability metrics.</p>
   </div>
 
   <div class="eq-card">
