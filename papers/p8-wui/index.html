@@ -135,15 +135,21 @@ window.MathJax = {
 <section id="overview">
   <h2 class="section-title">Overview</h2>
   <p class="abstract">
-    Wildland–urban interface (WUI) fires in Hong Kong couple dense high-rise towers, steep terrain, and a multimodal transport network, so evacuation is controlled by both <strong>vertical building discharge</strong> and <strong>horizontal pedestrian–vehicle flows</strong>. WUIEvac is a city-scale reliability-assessment framework that links a <strong>10 m Huygens wildfire spread model</strong>, census-derived demand, building T–N discharge curves, a 3DPN pedestrian network with metro exits, and a signal-controlled LTM vehicle network. It has been applied to <strong>six Hong Kong WUI districts</strong> and <strong>24 deterministic scenarios</strong>, calibrated against satellite-derived burn perimeters from <strong>three historical wildfires</strong>, and exercised on a demonstration area with <strong>7,376 buildings and 36,201 network nodes</strong>. In the phased Tung Chung 20 h case, the fire burns <strong>79.65 ha</strong> and produces <strong>421 WUI contact cells</strong>; <strong>55 buildings exceed 100 m and hold 78.2% of residents</strong>. Fire-front activation warns <strong>31,480 residents in three waves</strong>, all of whom clear the area under 100% compliance, while <strong>13 links</strong> exceed 30 min of congestion. The framework is designed to quantify evacuation reliability under uncertain fire, warning, and demand conditions.
+    Wildland–urban interface (WUI) fires in Hong Kong couple dense high-rise towers, steep terrain, and a multimodal transport network, so evacuation is controlled by both <strong>vertical building discharge</strong> and <strong>horizontal pedestrian–vehicle flows</strong>. WUIEvac is a city-scale reliability-assessment framework that links a <strong>10 m Huygens wildfire spread model</strong>, census-derived demand, building T–N discharge curves, a 3DPN pedestrian network with metro exits, and a signal-controlled LTM vehicle network. It has been applied to <strong>six Hong Kong WUI districts</strong> and <strong>24 deterministic scenarios</strong>, calibrated against satellite-derived burn perimeters from <strong>three historical wildfires</strong> (<strong>78% best calibration accuracy</strong>).
+  </p>
+  <p class="abstract" style="margin-top:1rem">
+    The evacuation layer achieves <strong>86% T90 accuracy on eight held-out WUI scenarios</strong>, benchmarked against high-fidelity building-plus-road simulations and cross-checked by expert AHP–FCE review. A <strong>7,415-building coupled run and wildfire simulation completes in about 73 s on a single workstation</strong>.
+  </p>
+  <p class="abstract" style="margin-top:1rem">
+    In the phased Tung Chung 20 h case, the fire burns <strong>79.65 ha</strong> and produces <strong>421 WUI contact cells</strong>; <strong>55 buildings exceed 100 m and hold 78.2% of residents</strong>. Fire-front activation warns <strong>31,480 residents in three waves</strong>; <strong>100% of activated residents</strong> clear the area under the 100% compliance assumption, while <strong>13 links</strong> exceed 30 min of congestion. The framework is designed to quantify evacuation reliability under uncertain fire, warning, and demand conditions.
   </p>
   <div class="stat-grid">
     <div class="stat"><div class="stat-value">6</div><div class="stat-label">Hong Kong WUI districts modelled</div></div>
     <div class="stat"><div class="stat-value">24</div><div class="stat-label">Deterministic scenarios</div></div>
     <div class="stat"><div class="stat-value">10 m</div><div class="stat-label">Wildfire spread grid</div></div>
-    <div class="stat"><div class="stat-value">3</div><div class="stat-label">Satellite-calibrated fires</div></div>
-    <div class="stat"><div class="stat-value">7,376</div><div class="stat-label">Buildings in demo area</div></div>
-    <div class="stat"><div class="stat-value">36,201</div><div class="stat-label">Network nodes in demo area</div></div>
+    <div class="stat"><div class="stat-value">78%</div><div class="stat-label">Fire calibration accuracy (best of 3 fires)</div></div>
+    <div class="stat"><div class="stat-value">86%</div><div class="stat-label">Evacuation prediction accuracy (held-out T90)</div></div>
+    <div class="stat"><div class="stat-value">73 s</div><div class="stat-label">7,415-building coupled run and wildfire</div></div>
   </div>
 </section>
 
@@ -266,6 +272,17 @@ window.MathJax = {
     </table>
   </div>
   <p class="eq-note">Signal timing and the Rayleigh departure mode are assumptions to be calibrated; the paper treats them as sensitivity parameters.</p>
+
+  <div class="eq-card">
+    <div class="eq-title">Validation · calibration and prediction accuracy</div>
+    <p class="eq-note"><strong>Fire calibration.</strong> Satellite-derived dNBR perimeters from three historical fires are compared with simulated burn scars; shape similarity, false-alarm/missing ratios, and burn-area agreement are combined into a calibration score, with a best value of <strong>78%</strong>.</p>
+    <div class="eq-block">
+      \[
+      A_e=100\left(1-\frac{1}{N}\sum_{i=1}^{N}\frac{|T_{90,i}^{\mathrm{LTM}}-T_{90,i}^{\mathrm{bench}}|}{T_{90,i}^{\mathrm{bench}}}\right)
+      \]
+    </div>
+    <p class="eq-note"><strong>Evacuation accuracy.</strong> On <strong>eight held-out WUI scenarios</strong>, LTM T90 is compared with a high-fidelity agent-based building-plus-road benchmark and cross-checked by expert AHP–FCE review; <strong>A<sub>e</sub> = 86%</strong>.</p>
+  </div>
 </section>
 
 <section id="case">
