@@ -100,6 +100,15 @@
 .cal-dot.miss{background:#2f6bff}
 .cal-star{color:#65a30d;font-size:.9rem;line-height:1}
 .cal-caption{font-size:.85rem;line-height:1.65;color:var(--muted);margin-top:.8rem;padding-top:.7rem;border-top:1px solid var(--border)}
+.net-figure{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.net-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.35rem}
+.net-panel{min-width:0;margin:0}
+.net-panel img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid #1e293b;background:#070d18}
+.net-panel figcaption{font-size:.82rem;line-height:1.5;color:#4b5563;margin-top:.4rem}
+.net-panel figcaption strong{color:#111827}
+.net-scale{display:flex;align-items:center;gap:.55rem;font-size:.78rem;color:var(--muted);margin-top:.75rem}
+.net-scale i{flex:1;height:8px;border-radius:999px;border:1px solid var(--border);background:linear-gradient(90deg,#0b1f3a,#0e7490,#22c55e,#facc15,#ef4444)}
+.net-caption{font-size:.85rem;line-height:1.65;color:var(--muted);margin-top:.8rem;padding-top:.7rem;border-top:1px solid var(--border)}
 @media(max-width:860px){
   .fw-flow{flex-direction:column;gap:.3rem;padding:.85rem}
   .fw-stage{padding:.9rem 1rem}
@@ -117,6 +126,9 @@
   .cal-name{font-size:1rem}
   .cal-panel figcaption{font-size:.85rem}
   .cal-caption{font-size:.88rem}
+  .net-grid{grid-template-columns:1fr}
+  .net-panel figcaption{font-size:.85rem}
+  .net-caption{font-size:.88rem}
 }
 @media(max-width:640px){.compare-grid,.value-grid{grid-template-columns:1fr}.eq-block{font-size:.8em}#overview .stat-grid{grid-template-columns:1fr 1fr}.case-group .stat-grid{grid-template-columns:1fr 1fr}.case-group .stat-value{font-size:1.2rem;white-space:nowrap}}
 </style>
@@ -381,6 +393,20 @@ window.MathJax = {
       \]
     </div>
     <p class="eq-note"><strong>S<sub>e</sub></strong>/<strong>R<sub>e</sub></strong> are the Newell–Daganzo link sending/receiving flows; <strong>g<sub>eff</sub></strong> is the effective green under a 90 s cycle. The same layer supports normal, pre-emption, coordinated, and flashing modes.</p>
+    <div class="net-figure">
+      <div class="net-grid">
+        <figure class="net-panel">
+          <img src="ltm-pedestrian.png" width="1600" height="1600" alt="3DPN pedestrian LTM final link use" loading="lazy" decoding="async">
+          <figcaption><strong>(a) Pedestrian 3DPN</strong> · final link use; cyan = signalised crossing</figcaption>
+        </figure>
+        <figure class="net-panel">
+          <img src="ltm-vehicle.png" width="1600" height="1600" alt="Vehicle road LTM final link use" loading="lazy" decoding="async">
+          <figcaption><strong>(b) Vehicle road network</strong> · final link use; green = signalised junction</figcaption>
+        </figure>
+      </div>
+      <div class="net-scale"><span>Link use</span><span>Low</span><i aria-hidden="true"></i><span>High</span></div>
+      <p class="net-caption"><strong>Fig. 4.</strong> Final cumulative link use in the LTM layers for a representative district: (a) 3DPN pedestrian network and (b) vehicle road network. Brighter links carry higher evacuation flow; signal layers are marked in cyan and green. Colour is normalized within each network.</p>
+    </div>
   </div>
 
   <div class="eq-card">
