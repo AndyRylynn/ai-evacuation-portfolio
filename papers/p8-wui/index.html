@@ -20,7 +20,6 @@
 .case-group.vertical{border-left-color:#1e40af}
 .case-group.horizontal{border-left-color:#047857}
 .case-group.horizontal .case-group-title{color:#047857}
-.case-note{font-size:.9rem;color:var(--muted);margin-top:1.2rem;line-height:1.8}
 .case-flow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.45rem;margin:1.1rem 0 .2rem;font-size:.82rem;color:#374151}
 .case-flow span{background:#fff7ed;border:1px solid #fed7aa;border-radius:999px;padding:.3rem .7rem}
 .case-flow b{color:#9a3412}
@@ -125,6 +124,8 @@
   .net-grid{grid-template-columns:1fr}
   .net-panel figcaption{font-size:.85rem}
   .net-caption{font-size:.88rem}
+  .case-flow{flex-direction:column;gap:.25rem}
+  .case-flow b{transform:rotate(90deg);line-height:1}
 }
 @media(max-width:640px){.compare-grid,.value-grid{grid-template-columns:1fr}.eq-block{font-size:.8em}#overview .stat-grid{grid-template-columns:1fr 1fr}.case-group .stat-grid{grid-template-columns:1fr 1fr}.case-group .stat-value{font-size:1.2rem;white-space:nowrap}}
 </style>
@@ -151,7 +152,7 @@ window.MathJax = {
 
 <div class="hero hero-flagship">
   <div class="hero-inner">
-  <div class="venue-tag">Working paper 2026</div>
+  <div class="venue-tag">Working paper 2027</div>
   <h1 class="paper-title">WUIEvac: <span class="title-nowrap">Reliability-Based</span> Assessment of <span class="title-nowrap">City-Scale</span> Wildfire Evacuation in High-Rise Urban Areas</h1>
   <p class="authors">
     <span class="author">Tong Lu</span><sup>1</sup>,
@@ -441,16 +442,16 @@ window.MathJax = {
 </section>
 
 <section id="case">
-  <h2 class="section-title">Case Study — Tung Chung WUI Fire (Phased Activation)</h2>
+  <h2 class="section-title">Case Study — Tung Chung WUI Fire</h2>
   <p class="abstract">
-    A 20-hour fire in the Tung Chung WUI burned <strong>79.65 ha</strong> and produced <strong>421 WUI contact cells</strong>. The fire front activates three SSUG zones in sequence between 2.6 h and 11.1 h, rather than evacuating the whole district at once. The district contains 747 buildings and 78,576 residents; <strong>55 buildings exceed 100 m and hold 78.2% of residents</strong>.
+    The 20 h Tung Chung fire burned <strong>79.65 ha</strong> and produced <strong>421 WUI contact cells</strong>. The fire front activated three SSUG zones in sequence between <strong>2.6 and 11.1 h</strong>, rather than evacuating the entire district at once. The district's <strong>747 buildings</strong> house <strong>78,576 residents</strong>; only <strong>55 buildings exceed 100 m</strong>, yet they hold <strong>78.2% of residents</strong>, so vertical discharge is the mandatory first phase for most of the population. Vertical release has a median of <strong>36 min</strong> and a 90th percentile of <strong>68 min</strong>, and across the three warning waves it accounts for about <strong>65% of the warning-to-clearance time</strong>—making the vertical layer, not the road network, the dominant early-phase constraint. Fire-front activation warns <strong>31,480 residents in three waves</strong>; <strong>47,096 remain outside the activation zones</strong>, and <strong>13 links</strong> (11 pedestrian, 2 vehicle) stay congested for more than 30 min. The case shows that high-rise WUI evacuation is governed by a vertical-to-horizontal handover: warning timing, stair discharge, and the first receiving links matter more than road-network capacity alone.
   </p>
   <div class="case-flow">
-    <span>Fire front</span><b>&rarr;</b><span>Vertical T–N / stairs</span><b>&rarr;</b><span>3DPN + metro</span><b>&rarr;</b><span>Signal-controlled vehicles</span>
+    <span>Fire front</span><b>&rarr;</b><span>3 SSUG zones</span><b>&rarr;</b><span>Vertical T–N / stairs</span><b>&rarr;</b><span>3DPN + metro</span><b>&rarr;</b><span>Signal-controlled vehicles</span>
   </div>
 
   <div class="case-group hazard">
-    <div class="case-group-title">Hazard</div>
+    <div class="case-group-title">Hazard &amp; exposure</div>
     <div class="stat-grid">
       <div class="stat"><div class="stat-value">79.65 ha</div><div class="stat-label">Burned area</div></div>
       <div class="stat"><div class="stat-value">421</div><div class="stat-label">WUI contact cells</div></div>
@@ -462,10 +463,10 @@ window.MathJax = {
   <div class="case-group vertical">
     <div class="case-group-title">Vertical evacuation</div>
     <div class="stat-grid">
-      <div class="stat"><div class="stat-value">747</div><div class="stat-label">Buildings modelled</div></div>
       <div class="stat"><div class="stat-value">55</div><div class="stat-label">Buildings ≥100 m</div></div>
       <div class="stat"><div class="stat-value">78.2%</div><div class="stat-label">Residents in ≥100 m buildings</div></div>
       <div class="stat"><div class="stat-value">36 / 68 min</div><div class="stat-label">Vertical release p50 / p90</div></div>
+      <div class="stat"><div class="stat-value">65%</div><div class="stat-label">Of warning-to-clearance time</div></div>
     </div>
   </div>
 
@@ -474,7 +475,7 @@ window.MathJax = {
     <div class="stat-grid">
       <div class="stat"><div class="stat-value">31,480</div><div class="stat-label">Residents activated</div></div>
       <div class="stat"><div class="stat-value">47,096</div><div class="stat-label">Not activated</div></div>
-      <div class="stat"><div class="stat-value">100%*</div><div class="stat-label">Evacuation success (activated)</div></div>
+      <div class="stat"><div class="stat-value">3</div><div class="stat-label">Warning waves</div></div>
       <div class="stat"><div class="stat-value">13</div><div class="stat-label">Congestion hotspots (11 pedestrian + 2 vehicle)</div></div>
     </div>
   </div>
@@ -494,13 +495,13 @@ window.MathJax = {
       <ul>
         <li>55 buildings ≥100 m hold 78.2% of residents.</li>
         <li>Vertical T–N / stair discharge before street flow.</li>
+        <li>Vertical discharge ≈65% of warning-to-clearance time.</li>
         <li>3DPN + metro exits + signal-controlled vehicle LTM.</li>
-        <li>Fire-front phased activation of SSUG zones.</li>
+        <li>Fire-front activation of three SSUG zones.</li>
       </ul>
     </div>
   </div>
 
-  <p class="case-note">* The demo scenario assumes 100% compliance among activated residents. Field WUI compliance can be much lower (e.g., ~46% in the Kincade Fire GPS study), so these numbers are an upper bound; the paper treats compliance as an uncertainty factor. The scenario activates only fire-front zones, not the whole district. It is a demonstration scenario; final ensemble results will replace it.</p>
 </section>
 
 <section id="value">
@@ -546,7 +547,7 @@ window.MathJax = {
   title   = {WUIEvac: Reliability-Based Assessment of City-Scale Wildfire
              Evacuation in High-Rise Urban Areas},
   author  = {Lu, Tong and Qin, Sizhong and Tang, Xiyan and Tian, Yuan and Zhang, Yuxin and Huang, Xinyan and Lu, Xinzheng},
-  year    = {2026},
+  year    = {2027},
   note    = {Working paper}
 }</div>
     <button class="copy-btn" onclick="copyBib(this)">Copy</button>
